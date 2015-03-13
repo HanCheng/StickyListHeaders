@@ -29,8 +29,8 @@ import se.emilsjolander.stickylistheaders.WrapperViewList.LifeCycleListener;
 /**
  * Even though this is a FrameLayout subclass we still consider it a ListView.
  * This is because of 2 reasons:
- *   1. It acts like as ListView.
- *   2. It used to be a ListView subclass and refactoring the name would cause compatibility errors.
+ * 1. It acts like as ListView.
+ * 2. It used to be a ListView subclass and refactoring the name would cause compatibility errors.
  *
  * @author Emil Sjölander
  */
@@ -38,7 +38,7 @@ public class StickyListHeadersListView extends FrameLayout {
 
     public interface OnHeaderClickListener {
         void onHeaderClick(StickyListHeadersListView l, View header,
-                                  int itemPosition, long headerId, boolean currentlySticky);
+                           int itemPosition, long headerId, boolean currentlySticky);
     }
 
     /**
@@ -62,14 +62,14 @@ public class StickyListHeadersListView extends FrameLayout {
      */
     public interface OnStickyHeaderChangedListener {
         /**
-         * @param l             The view parent
-         * @param header        The new sticky header view.
-         * @param itemPosition  The position of the item within the adapter's data set of
-         *                      the item whose header is now sticky.
-         * @param headerId      The id of the new sticky header.
+         * @param l            The view parent
+         * @param header       The new sticky header view.
+         * @param itemPosition The position of the item within the adapter's data set of
+         *                     the item whose header is now sticky.
+         * @param headerId     The id of the new sticky header.
          */
         void onStickyHeaderChanged(StickyListHeadersListView l, View header,
-                                          int itemPosition, long headerId);
+                                   int itemPosition, long headerId);
 
     }
 
@@ -127,7 +127,7 @@ public class StickyListHeadersListView extends FrameLayout {
         mList.setDividerHeight(0);
 
         if (attrs != null) {
-            TypedArray a = context.getTheme().obtainStyledAttributes(attrs,R.styleable.StickyListHeadersListView, 0, 0);
+            TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.StickyListHeadersListView, 0, 0);
 
             try {
                 // -- View attributes --
@@ -337,7 +337,7 @@ public class StickyListHeadersListView extends FrameLayout {
                 }
                 ensureHeaderHasCorrectLayoutParams(mHeader);
                 measureHeader(mHeader);
-                if(mOnStickyHeaderChangedListener != null) {
+                if (mOnStickyHeaderChangedListener != null) {
                     mOnStickyHeaderChangedListener.onStickyHeaderChanged(this, mHeader, headerPosition, mHeaderId);
                 }
                 // Reset mHeaderOffset to null ensuring
@@ -568,9 +568,7 @@ public class StickyListHeadersListView extends FrameLayout {
     }
 
     /**
-     *
-     * @param stickyHeaderTopOffset
-     *          The offset of the sticky header fom the top of the view
+     * @param stickyHeaderTopOffset The offset of the sticky header fom the top of the view
      */
     public void setStickyHeaderTopOffset(int stickyHeaderTopOffset) {
         mStickyHeaderTopOffset = stickyHeaderTopOffset;
@@ -642,7 +640,7 @@ public class StickyListHeadersListView extends FrameLayout {
 
     private boolean requireSdkVersion(int versionCode) {
         if (Build.VERSION.SDK_INT < versionCode) {
-            Log.e("StickyListHeaders", "Api lvl must be at least "+versionCode+" to call this method");
+            Log.e("StickyListHeaders", "Api lvl must be at least " + versionCode + " to call this method");
             return false;
         }
         return true;
@@ -747,7 +745,7 @@ public class StickyListHeadersListView extends FrameLayout {
     public int getHeaderViewsCount() {
         return mList.getHeaderViewsCount();
     }
-    
+
     public void addFooterView(View v, Object data, boolean isSelectable) {
         mList.addFooterView(v, data, isSelectable);
     }
@@ -1052,7 +1050,7 @@ public class StickyListHeadersListView extends FrameLayout {
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
         if (superState != BaseSavedState.EMPTY_STATE) {
-          throw new IllegalStateException("Handling non empty state of parent class is not implemented");
+            throw new IllegalStateException("Handling non empty state of parent class is not implemented");
         }
         return mList.onSaveInstanceState();
     }
@@ -1069,7 +1067,7 @@ public class StickyListHeadersListView extends FrameLayout {
         return mList.canScrollVertically(direction);
     }
 
-    public void setTranscriptMode (int mode) {
+    public void setTranscriptMode(int mode) {
         mList.setTranscriptMode(mode);
     }
 

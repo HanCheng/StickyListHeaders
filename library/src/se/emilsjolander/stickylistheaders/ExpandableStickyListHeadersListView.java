@@ -8,11 +8,12 @@ import java.util.List;
 
 /**
  * add expand/collapse functions like ExpandableListView
+ *
  * @author lsjwzh
  */
 public class ExpandableStickyListHeadersListView extends StickyListHeadersListView {
-    public interface IAnimationExecutor{
-        public void executeAnim(View target,int animType);
+    public interface IAnimationExecutor {
+        public void executeAnim(View target, int animType);
     }
 
     public final static int ANIMATION_COLLAPSE = 1;
@@ -20,14 +21,12 @@ public class ExpandableStickyListHeadersListView extends StickyListHeadersListVi
 
     ExpandableStickyListHeadersAdapter mExpandableStickyListHeadersAdapter;
 
-
-
     IAnimationExecutor mDefaultAnimExecutor = new IAnimationExecutor() {
         @Override
         public void executeAnim(View target, int animType) {
-            if(animType==ANIMATION_EXPAND){
+            if (animType == ANIMATION_EXPAND) {
                 target.setVisibility(VISIBLE);
-            }else if(animType==ANIMATION_COLLAPSE){
+            } else if (animType == ANIMATION_COLLAPSE) {
                 target.setVisibility(GONE);
             }
         }
@@ -57,22 +56,22 @@ public class ExpandableStickyListHeadersListView extends StickyListHeadersListVi
         super.setAdapter(mExpandableStickyListHeadersAdapter);
     }
 
-    public View findViewByItemId(long itemId){
+    public View findViewByItemId(long itemId) {
         return mExpandableStickyListHeadersAdapter.findViewByItemId(itemId);
     }
 
-    public long findItemIdByView(View view){
+    public long findItemIdByView(View view) {
         return mExpandableStickyListHeadersAdapter.findItemIdByView(view);
     }
 
     public void expand(long headerId) {
-        if(!mExpandableStickyListHeadersAdapter.isHeaderCollapsed(headerId)){
+        if (!mExpandableStickyListHeadersAdapter.isHeaderCollapsed(headerId)) {
             return;
         }
         mExpandableStickyListHeadersAdapter.expand(headerId);
         //find and expand views in group
         List<View> itemViews = mExpandableStickyListHeadersAdapter.getItemViewsByHeaderId(headerId);
-        if(itemViews==null){
+        if (itemViews == null) {
             return;
         }
         for (View view : itemViews) {
@@ -81,13 +80,13 @@ public class ExpandableStickyListHeadersListView extends StickyListHeadersListVi
     }
 
     public void collapse(long headerId) {
-        if(mExpandableStickyListHeadersAdapter.isHeaderCollapsed(headerId)){
+        if (mExpandableStickyListHeadersAdapter.isHeaderCollapsed(headerId)) {
             return;
         }
         mExpandableStickyListHeadersAdapter.collapse(headerId);
         //find and hide views with the same header
         List<View> itemViews = mExpandableStickyListHeadersAdapter.getItemViewsByHeaderId(headerId);
-        if(itemViews==null){
+        if (itemViews == null) {
             return;
         }
         for (View view : itemViews) {
@@ -95,8 +94,8 @@ public class ExpandableStickyListHeadersListView extends StickyListHeadersListVi
         }
     }
 
-    public boolean isHeaderCollapsed(long headerId){
-        return  mExpandableStickyListHeadersAdapter.isHeaderCollapsed(headerId);
+    public boolean isHeaderCollapsed(long headerId) {
+        return mExpandableStickyListHeadersAdapter.isHeaderCollapsed(headerId);
     }
 
     public void setAnimExecutor(IAnimationExecutor animExecutor) {
@@ -111,14 +110,14 @@ public class ExpandableStickyListHeadersListView extends StickyListHeadersListVi
      *               or ExpandCollapseAnimation.EXPAND
      */
     private void animateView(final View target, final int type) {
-        if(ANIMATION_EXPAND==type&&target.getVisibility()==VISIBLE){
+        if (ANIMATION_EXPAND == type && target.getVisibility() == VISIBLE) {
             return;
         }
-        if(ANIMATION_COLLAPSE==type&&target.getVisibility()!=VISIBLE){
+        if (ANIMATION_COLLAPSE == type && target.getVisibility() != VISIBLE) {
             return;
         }
-        if(mDefaultAnimExecutor !=null){
-            mDefaultAnimExecutor.executeAnim(target,type);
+        if (mDefaultAnimExecutor != null) {
+            mDefaultAnimExecutor.executeAnim(target, type);
         }
 
     }
